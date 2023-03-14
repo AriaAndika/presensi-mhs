@@ -13,7 +13,7 @@
 			
 		if (stop) { return }
 		if (detections){
-			ctx.clearRect(0,0,740,size);
+			ctx.clearRect(0,0,height,size);
 			
 			const boxes = detections.map(detection=>{
 				const result = faceMatcher.findBestMatch(detection.descriptor)
@@ -40,15 +40,9 @@
   }
 	
 	export let close: () => void
-	// export let onSuccess = null
+	const height = 4/3 * size
 	
-  // const models = 'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights'
-	// const size = 416 // 128, 416, 512, 608
-	// minimum confidence threshold, // default: 0.5
-	// const delay = 10
-	// const scoreThreshold = .5
-	
-	let camera = getCamera(740,size)
+	let camera = getCamera(height,size)
 	
 	let video: HTMLVideoElement
 	let canvas: HTMLCanvasElement
@@ -100,8 +94,8 @@
 	<div on:click|stopPropagation={()=>{}}>
 		
 		<div class="min">
-			<video width="{740}" height="{size}" autoplay muted bind:this={video}></video>
-			<canvas width="{740}" height="{size}" bind:this={canvas}></canvas>
+			<video width="{height}" height="{size}" autoplay muted bind:this={video}></video>
+			<canvas width="{height}" height="{size}" bind:this={canvas}></canvas>
 		</div>
 		
 		<div>
