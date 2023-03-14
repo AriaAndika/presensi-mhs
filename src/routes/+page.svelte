@@ -20,10 +20,6 @@
 	
 </script>
 
-<svelte:head>
-	<title>Login | Presensi Online</title>
-</svelte:head>
-
 <div class="top-container">
 	<div class="box">
 		<form on:submit|preventDefault={submit}>
