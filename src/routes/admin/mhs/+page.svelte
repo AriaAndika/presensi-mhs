@@ -1,5 +1,5 @@
 
-<script lang=ts>
+<!-- <script lang=ts>
   import { flatten } from "$lib/lib";
 	import Popup from "$lib/Popup.svelte"
 	import { adminInfo, getImgLink, fetchAdminInfo, client } from "$lib/state"
@@ -112,9 +112,9 @@
 		if (search == '') {return true}
 		return e.nama.toLowerCase().startsWith(search.toLowerCase())
 	})
-</script>
+</script> -->
 
-<Popup bind:show={showPopup} bind:hide={hidePopup} bind:prevent={load} submit={submitAction}>
+<!-- <Popup bind:show={showPopup} bind:hide={hidePopup} bind:prevent={load} submit={submitAction}>
 	<div class="form-down">
 		{#if actionType == 'delete'}
 		<div>
@@ -207,7 +207,7 @@
 					</tbody>
 			</table>
 	</div>
-</main>
+</main> -->
 <!-- Akhiran Main -->
 
 

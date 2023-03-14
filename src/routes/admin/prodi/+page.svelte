@@ -1,5 +1,5 @@
 
-
+<!-- 
 <main>
 	<h1>Daftar Program Studi</h1>
 	<div class="recent">
@@ -36,5 +36,5 @@
 					</tbody>
 			</table>
 	</div>
-</main>
+</main> -->
 <!-- Akhiran Main -->

@@ -1,4 +1,4 @@
-<script lang=ts>
+<!-- <script lang=ts>
   import { flatten, hariMap } from "$lib/lib";
   import Popup from "$lib/Popup.svelte";
 	import { adminInfo, client, fetchAdminInfo } from "$lib/state";
@@ -147,10 +147,10 @@
 			if (search == '') return true
 			else return e.matkul.nama.toLowerCase().startsWith(search.toLowerCase())
 		})
-</script>
+</script> -->
 
 
-<Popup bind:show={showPopup} bind:hide={hidePopup} bind:prevent={load} submit={submitAction}>
+<!-- <Popup bind:show={showPopup} bind:hide={hidePopup} bind:prevent={load} submit={submitAction}>
 	<div class="form-down">
 		{#if actionType == 'delete'}
 		<div>
@@ -225,9 +225,9 @@
 		</div>
 		{/if}
 	</div>
-</Popup>
+</Popup> -->
 
-<main>
+<!-- <main>
 	<h1>Daftar Jadwal</h1>
 	<div class="recent">
 			<h2>Kelompok</h2>
@@ -288,5 +288,5 @@
 					</tbody>
 			</table>
 	</div>
-</main>
+</main> -->
 <!-- Akhiran Main -->

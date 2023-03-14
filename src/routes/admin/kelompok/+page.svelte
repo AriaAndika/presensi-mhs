@@ -1,12 +1,12 @@
-<script lang=ts>
+<!-- <script lang=ts>
   import { flatten } from "$lib/lib";
 	import { adminInfo } from "$lib/state";
 	
 	let kel = flatten($adminInfo.mhs.filter(e=>e.type=='mhs').map(e=>e.kelompok),e=>e)
 	
-</script>
+</script> -->
 
-<main>
+<!-- <main>
 	<h1>Daftar Kelompok</h1>
 
 
@@ -60,5 +60,5 @@
 					</tbody>
 			</table>
 	</div>
-</main>
+</main> -->
 <!-- Akhiran Main -->

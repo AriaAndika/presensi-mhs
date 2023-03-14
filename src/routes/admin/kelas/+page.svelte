@@ -1,4 +1,4 @@
-<script lang=ts>
+<!-- <script lang=ts>
 	import * as faceapi from '@vladmandic/face-api'
   import { onDestroy, onMount } from 'svelte';
 	import Data from "./data.json";
@@ -82,10 +82,11 @@
 		stop=true
 		console.log('STOP')
 	})
-</script>
+</script> -->
+<!-- svelte-ignore a11y-media-has-caption -->
 
 
-<main>
+<!-- <main>
 	<h1>Daftar Kelompok</h1>
 	<div class="recent">
 		<h2>Kelompok</h2><br>
@@ -106,7 +107,6 @@
 		</div><br><br>
 		
 		<div style="position: relative;">
-			<!-- svelte-ignore a11y-media-has-caption -->
 			<video  style="max-width:40%;width: 100%;height: 100%;" width="{size}" height="{size}" autoplay bind:this={video}></video>
 			<canvas style="max-width:40%;width: 100%;" width="{size}" height="{size}" bind:this={canvas}></canvas>
 			<h2>{@html msg}</h2>
@@ -140,4 +140,4 @@
 			</tbody>
 		</table>
 	</div>
-</main>
+</main> -->
