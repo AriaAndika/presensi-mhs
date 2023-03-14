@@ -58,7 +58,7 @@
   }
 	
 	export let close: () => void
-	export let onSuccess: null | ((nama:string,descriptor: Float32Array) => void) = null
+	export let onSuccess: ((nama:string,descriptor: Float32Array) => void)
 	
   // const models = 'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights'
 	// const size = 416 // 128, 416, 512, 608
@@ -122,7 +122,7 @@
 			<input style="outline: 2px solid var(--color-primary);padding:.7rem 1rem" type="text" bind:value={nama} placeholder="Masukan nama">
 				
 			<button disabled={nama==''||!detected} on:click={()=>{
-				onSuccess?.(nama,descriptor ?? new Float32Array());
+				onSuccess(nama,descriptor ?? new Float32Array());
 				close()
 			}}>Tambahkan</button>
 		</div>

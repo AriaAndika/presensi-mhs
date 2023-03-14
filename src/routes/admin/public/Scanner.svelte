@@ -7,20 +7,27 @@
 	
 	async function main() {
 		// new faceapi.TinyFaceDetectorOptions({ inputSize: size, scoreThreshold })
-    const detections = video ? await faceapi.detectSingleFace(video)
+    const detections = video ? await faceapi.detectAllFaces(video)
 			.withFaceLandmarks()
-			.withFaceDescriptor() : undefined;
+			.withFaceDescriptors() : undefined;
 			
 		if (stop) { return }
 		if (detections){
-			ctx.clearRect(0,0,size,size);
-			const result = faceMatcher.findBestMatch(detections.descriptor)
+			ctx.clearRect(0,0,740,size);
 			
-			msg = result.label == 'unknown' ? 'Wajah tidak dikenali' : ("Sukses, Halo " + result.label)
+			const boxes = detections.map(detection=>{
+				const result = faceMatcher.findBestMatch(detection.descriptor)
+				const nama = result.label == 'unknown' ? 'Tidak dikenali' : result.label
+				// return new faceapi.LabeledFaceDescriptors(nama, [detection.descriptor] )
+				return {label: nama,detect: detection.detection}
+			})
 			
-			if (detections) {
-				faceapi.draw.drawDetections(canvas,detections)
-			}
+			msg = "Sukses, halo " + boxes.map(e=>e.label == 'Tidak dikenali' ? '' : e.label).join(', ')
+			
+			boxes.forEach(({ label, detect })=>{
+				const box = new faceapi.draw.DrawBox(detect.box,{ label })
+				box.draw(canvas)
+			})
 			
     } else {
       msg = 'Mendeteksi...'
@@ -41,7 +48,7 @@
 	// const delay = 10
 	// const scoreThreshold = .5
 	
-	let camera = getCamera()
+	let camera = getCamera(740,size)
 	
 	let video: HTMLVideoElement
 	let canvas: HTMLCanvasElement
@@ -66,6 +73,7 @@
     const stream = await camera.start()
 		if (stop) { camera.stop();return; }
     video.srcObject = stream
+		
 		
 		// LOAD DATA
 		const labels = Object.entries($datas).map(([nama,descriptor]: [string,any])=>{
@@ -92,8 +100,8 @@
 	<div on:click|stopPropagation={()=>{}}>
 		
 		<div class="min">
-			<video width="{size}" height="{size}" autoplay muted bind:this={video}></video>
-			<canvas width="{size}" height="{size}" bind:this={canvas}></canvas>
+			<video width="{740}" height="{size}" autoplay muted bind:this={video}></video>
+			<canvas width="{740}" height="{size}" bind:this={canvas}></canvas>
 		</div>
 		
 		<div>
@@ -127,7 +135,7 @@
 		min-height: 90vh;
 	}
 	.min{ position: relative; }
-	.min > video { position: absolute;top: 0;left: 0;width: 100%;height: 100%; }
+	.min > video { position: absolute;top: 0;left: 0;width: 100%; }
 	.min > canvas { position: relative;top: 0;left: 0;width: 100%; }
 	/* .za-form{
 		background-color: var(--color-background);

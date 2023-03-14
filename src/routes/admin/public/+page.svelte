@@ -14,7 +14,7 @@
 			e[nama] = descriptor
 			return e
 		})
-		
+		console.log('ADDED',nama)
 		news.update(e=>{
 			if (e.length == 3){
 				e.pop()
@@ -43,8 +43,11 @@
 <main>
 	<h1>Public Recognition</h1>
 	<div class="recent">
+		{#if !showScanner}
 		<button on:click={()=>showAdder=true}>Daftar</button>
 		<button on:click={()=>showScanner=true}>Scan</button>
+		{/if}
+		
 		<br><br><br>
 		<table>
 			<thead>

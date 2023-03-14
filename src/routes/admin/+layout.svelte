@@ -31,11 +31,11 @@
 			mat: 'groups',
 			text: 'Mahasiswa',
 		},
-		{
-			href: '/admin/kelompok',
-			mat: 'add_business',
-			text: 'Tambah Kelompok',
-		},
+		// {
+		// 	href: '/admin/kelompok',
+		// 	mat: 'add_business',
+		// 	text: 'Tambah Kelompok',
+		// },
 		{
 			href: '/admin/prodi',
 			mat: 'school',

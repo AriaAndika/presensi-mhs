@@ -154,7 +154,7 @@
 			<h2>Kelas</h2>
 			 <div class="selected">
 					<select name="class" id="class" bind:value={filter1}>
-						<option value={null}>Pilih Kelas</option>
+						<option value="">Pilih Kelas</option>
 						{#each availableFilter1 as f}
 						<option>{f}</option>
 						{/each}
