@@ -109,7 +109,7 @@
 			<div class="recent-updates">
 					<h2>Update Terbaru</h2>
 					{#each $news as n}
-					<div class="updates">
+					<div class="updates" style="margin-bottom: 0.5rem;">
 							<div class="update">
 									<div class="profile-photo">
 											<img src="/img/admin.png" alt="logo">

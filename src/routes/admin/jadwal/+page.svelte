@@ -1,11 +1,10 @@
-<!-- <script lang=ts>
+<script lang=ts>
   import { flatten, hariMap } from "$lib/lib";
   import Popup from "$lib/Popup.svelte";
-	import { adminInfo, client, fetchAdminInfo } from "$lib/state";
+	import { adminInfo, client, fetchAdminInfo, validateData } from "$lib/state";
   import type { User } from "$lib/types";
 	
 	async function onAdd() {
-		// return console.log(data)
 		const dataJadwal = [data.jadwal1]
 		if (data.jadwal2.hari != '' || data.jadwal2.ruang != '' || data.jadwal2.time1 != '' || data.jadwal2.time2 != ''){
 			dataJadwal.push(data.jadwal2)
@@ -26,9 +25,9 @@
 			msg = error.details;
 			load = false
 			return
-		} else { adminInfo.set(await fetchAdminInfo()) }
+		} else { await validateData() }
 		load = false
-		hidePopup(true)
+		hidePopup()
 	}
 	async function onDelete(){
 		load = true
@@ -36,9 +35,9 @@
 		console.log(supaData,error)
 		
 		// MAIN
-		if (error){ msg = error.details;load = false;return	} else { adminInfo.set(await fetchAdminInfo()) }
+		if (error){ msg = error.details;load = false;return	} else { await validateData() }
 		load = false
-		hidePopup(true)
+		hidePopup()
 	}
 	async function onEdit() {
 		load = true
@@ -48,9 +47,9 @@
 		console.log(supaData,error)
 		
 		// MAIN
-		if (error){ msg = error.details;load = false;return	} else { adminInfo.set(await fetchAdminInfo()) }
+		if (error){ msg = error.details;load = false;return	} else { await validateData() }
 		load = false
-		hidePopup(true)
+		hidePopup()
 	}
 	function openDelete(e: string) {
 		return () => {
@@ -84,8 +83,8 @@
 	let submitAction = onAdd
 	
 	let actionType: 'edit'|'add'|'delete' = 'add'
-	let hidePopup
-	let showPopup
+	let hidePopup = () => {}
+	let showPopup = () => {}
 	let load = false
 	let msg = ''
 	let data = {
@@ -129,7 +128,7 @@
 	let matkul = Object.values(Object.fromEntries($adminInfo.jadwal.map(e=>[e.matkul.id,e.matkul])))
 	let dosen = $adminInfo.mhs.filter(e=>e.type=='dosen')
 	
-	let mergeMatkul = {}
+	let mergeMatkul = {} as any
 	$adminInfo.jadwal.forEach(e=>{
 		mergeMatkul[e.matkul.nama] = true
 	})
@@ -147,10 +146,10 @@
 			if (search == '') return true
 			else return e.matkul.nama.toLowerCase().startsWith(search.toLowerCase())
 		})
-</script> -->
+</script>
 
 
-<!-- <Popup bind:show={showPopup} bind:hide={hidePopup} bind:prevent={load} submit={submitAction}>
+<Popup bind:show={showPopup} bind:hide={hidePopup} bind:prevent={load} submit={submitAction}>
 	<div class="form-down">
 		{#if actionType == 'delete'}
 		<div>
@@ -225,9 +224,9 @@
 		</div>
 		{/if}
 	</div>
-</Popup> -->
+</Popup>
 
-<!-- <main>
+<main>
 	<h1>Daftar Jadwal</h1>
 	<div class="recent">
 			<h2>Kelompok</h2>
@@ -263,30 +262,30 @@
 			</div>
 			<table>
 					<thead>
-							<tr>
-									<th>NO.</th>
-									<th>Kelompok</th>
-									<th>Prodi</th>
-									<th>Matkul</th>
-									<th>JAM 1</th>
-									<th>JAM 2</th>
-									<th>AKSI</th>
-							</tr>
+						<tr>
+							<th>NO.</th>
+							<th>Kelompok</th>
+							<th>Prodi</th>
+							<th>Matkul</th>
+							<th>JAM 1</th>
+							<th>JAM 2</th>
+							<th>AKSI</th>
+						</tr>
 					</thead>
 					<tbody>
 						{#each result as { kelompok, matkul: { nama }, jadwal1, jadwal2 }, i}
 							<tr>
-									<td>{i+1}.</td>
-									<td>{kelompok}</td>
-									<td>Teknik Informatika</td>
-									<td>{nama}</td>
-									<td class="success">{jadwal1.split(',')[1]}</td>
-									<td class="danger">{jadwal2?.split(',')[1] ?? '-'}</td>
-									<td><button><span class="material-symbols-outlined">edit</span></button><button><span class="material-symbols-outlined">delete</span></button></td>
+								<td>{i+1}.</td>
+								<td>{kelompok}</td>
+								<td>Teknik Informatika</td>
+								<td>{nama}</td>
+								<td class="success">{jadwal1.split(',')[1]}</td>
+								<td class="danger">{jadwal2?.split(',')[1] ?? '-'}</td>
+								<td><button><span class="material-symbols-outlined">edit</span></button><button><span class="material-symbols-outlined">delete</span></button></td>
 							</tr>
 						{/each}
 					</tbody>
 			</table>
 	</div>
-</main> -->
+</main>
 <!-- Akhiran Main -->

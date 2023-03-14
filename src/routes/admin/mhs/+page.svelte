@@ -1,11 +1,12 @@
 
-<!-- <script lang=ts>
+<script lang=ts>
   import { flatten } from "$lib/lib";
 	import Popup from "$lib/Popup.svelte"
-	import { adminInfo, getImgLink, fetchAdminInfo, client } from "$lib/state"
+	import { adminInfo, fetchAdminInfo, client, validateData } from "$lib/state"
+	import { getImgLink } from "$lib/utility";
   import type { User } from "$lib/types";
 	
-	function imgErr(e) {
+	function imgErr(e: any) {
 		if (e.currentTarget.src != '/img/admin.png')
 			e.currentTarget.src = '/img/admin.png'
 	}
@@ -19,9 +20,9 @@
 			msg = error.code === '23505' ? 'NIM Tidak tersedia' : error.details;
 			load = false
 			return
-		} else { adminInfo.set(await fetchAdminInfo()) }
+		} else { await validateData() }
 		load = false
-		hidePopup(true)
+		hidePopup()
 	}
 	async function onDelete(){
 		load = true
@@ -29,9 +30,9 @@
 		console.log(supaData,error)
 		
 		// MAIN
-		if (error){ msg = error.details;load = false;return	} else { adminInfo.set(await fetchAdminInfo()) }
+		if (error){ msg = error.details;load = false;return	} else { await validateData() }
 		load = false
-		hidePopup(true)
+		hidePopup()
 	}
 	async function onEdit() {
 		load = true
@@ -41,9 +42,9 @@
 		console.log(supaData,error)
 		
 		// MAIN
-		if (error){ msg = error.details;load = false;return	} else { adminInfo.set(await fetchAdminInfo()) }
+		if (error){ msg = error.details;load = false;return	} else { await validateData() }
 		load = false
-		hidePopup(true)
+		hidePopup()
 	}
 	function openDelete(e: string) {
 		return () => {
@@ -82,8 +83,8 @@
 	let submitAction = onAdd
 	
 	let actionType: 'edit'|'add'|'delete' = 'add'
-	let hidePopup
-	let showPopup
+	let hidePopup: () => {}
+	let showPopup: () => {}
 	let load = false
 	let msg = ''
 	let data = {
@@ -101,20 +102,20 @@
 	$: mhs = $adminInfo.mhs.filter(e=>e.type=='mhs')
 	$: availableFilter1 = flatten(mhs.map(e=>e.kelompok),e=>e)
 	
-	let filter1
-	
+	let filter1 = ''
+	let popup: HTMLDivElement
 	
 	$: res = mhs.filter(e=>{
-		if (!filter1) { return true }
+		if (filter1 == '') { return true }
 		return e.kelompok==filter1
 	})
 	.filter(e=>{
 		if (search == '') {return true}
 		return e.nama.toLowerCase().startsWith(search.toLowerCase())
 	})
-</script> -->
+</script>
 
-<!-- <Popup bind:show={showPopup} bind:hide={hidePopup} bind:prevent={load} submit={submitAction}>
+<Popup bind:show={showPopup} bind:hide={hidePopup} bind:prevent={load} submit={submitAction}>
 	<div class="form-down">
 		{#if actionType == 'delete'}
 		<div>
@@ -207,12 +208,12 @@
 					</tbody>
 			</table>
 	</div>
-</main> -->
+</main>
 <!-- Akhiran Main -->
 
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- <div id="popup" class="popup" style="max-height: 100vh" bind:this={popup}>
+<div id="popup" class="popup" style="max-height: 100vh" bind:this={popup}>
 	<div class="popup-content">
 		<form style="display: flex;flex-direction: column;">
 			<span id="close" class="close" style="text-align:right;" on:click={()=>popup.style.display = "none"}>&times;</span>
@@ -239,4 +240,4 @@
 			
 		</form>
 	</div>
-</div> -->
+</div>

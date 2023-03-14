@@ -21,13 +21,13 @@
 </script>
 
 <svelte:head>
-	<title>Login | Presensi Udinus</title>
+	<title>Login | Presensi Online</title>
 </svelte:head>
 
 <div class="top-container">
 	<div class="box">
 		<form on:submit|preventDefault={submit}>
-			<h2>LOGIN PRESENSI UDINUS</h2>
+			<h2>LOGIN PRESENSI ONLINE</h2>
 			<div class="inputBox">
 				<input type="text" id="nim" name="nim" required bind:value={nim} disabled={loading}/>
 				<span>NIM</span>

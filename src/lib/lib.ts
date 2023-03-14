@@ -32,7 +32,7 @@ export function getDate() {
 
 export function footerGetDate() {
 	const { hari, tanggal, bulan, tahun} = getDate();
-	return `© ${hari}, ${tanggal} ${bulan} ${tahun} | PRESENSI UDINUS | All Right Reserved`
+	return `© ${hari}, ${tanggal} ${bulan} ${tahun} | PRESENSI ONLINE | All Right Reserved`
 }
 
 export function getUiTime() {
