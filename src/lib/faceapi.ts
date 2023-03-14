@@ -1,8 +1,8 @@
 
 
 
-// export const models = 'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights'
-export const models = '/models'
+export const models = 'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights'
+// export const models = '/models'
 export const size = 416 // 128, 416, 512, 608
 export const delay = 100
 export const useGeo = false
